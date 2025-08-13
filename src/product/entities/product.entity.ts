@@ -1,7 +1,8 @@
 // Tenemos que importar entity
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, BeforeUpdate, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { ProductImage } from "./product-image-entity";
 
-@Entity()
+@Entity({name: 'products'})
 export class Product {
     @PrimaryGeneratedColumn('uuid')
     id: string;
@@ -11,9 +12,9 @@ export class Product {
         // No puede aver dos productos que tengan el mismo nombre
         unique: true
     })
-    title2: string;
+    title: string;
 
-    @Column('numeric', {
+    @Column('float', {
         // Valor por defecto
         default: 0
     })
@@ -44,4 +45,37 @@ export class Product {
 
     @Column('text')
     gender: string
+
+
+    @Column('text', {
+        array: true,
+        default: []
+    })
+    tags: string[]
+
+    // Un producto tiene muchas imagenes
+    @OneToMany(
+        () => ProductImage,
+        (productImage) => productImage.product,
+        // La propiedad eager realiza todos los inner join correspondientes 
+        {cascade: true, eager: true}
+    )
+    images?:ProductImage[];
+
+    // Antes de insertar realiza lo siguiente
+    @BeforeInsert()
+    checkSlugInsert(){
+        if(!this.slug){
+            this.slug = this.title;
+        }
+
+        this.slug = this.slug.toLowerCase().replaceAll(' ', '_').replaceAll("'", '')
+    }
+
+
+    // Antes de modificar realiza lo siguiente
+    @BeforeUpdate()
+    checkSlugUpdate(){
+        this.slug = this.slug.toLowerCase().replaceAll(' ', '_').replaceAll("'", '')
+    }
 }
