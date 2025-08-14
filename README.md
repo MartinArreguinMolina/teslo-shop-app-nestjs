@@ -16,6 +16,11 @@ yarn add @nestjs/config
 yarn add @nestjs/typeorm typeorm pg
 ```
 
+- Es comando es necesario para poder trabajar con archivos
+```
+yarn add -D @types/multer
+```
+
 
 # Teslo API
 1. Clonar el repositorio
