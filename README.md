@@ -21,6 +21,29 @@ yarn add @nestjs/typeorm typeorm pg
 yarn add -D @types/multer
 ```
 
+- Paquete para encriptar las contraseñas
+```
+yarn add bcrypt
+```
+
+- JWT para realizar la autenticacion del usuario
+```
+yarn add @nestjs/passport passport
+yarn add @nestjs/jwt passport-jwt
+yarn add -D @types/passport-jwt 
+```
+
+- Para la documentacion de la api
+```
+yarn add @nestjs/swagger
+```
+
+- Para instalar los Ws
+```
+yarn add @nestjs/websockets @nestjs/platform-socket.io
+yarn add socket.io
+```
+
 
 # Teslo API
 1. Clonar el repositorio
