@@ -21,7 +21,7 @@ import { MessagesWsModule } from './messages-ws/messages-ws.module';
       ssl: process.env.STATE === 'prod',
       extra: {
         ssl: process.env.STATE === 'prod'
-          ? { rejectUnauthorized: true }
+          ? { rejectUnauthorized: false }
           : null,
       },
       type: 'postgres',
